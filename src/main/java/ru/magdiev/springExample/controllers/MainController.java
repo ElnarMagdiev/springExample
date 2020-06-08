@@ -16,20 +16,26 @@ public class MainController {
     private MessageRepository messageRepository;
 
     @GetMapping
-    public String index(Model model) {
-        Iterable<Message> messages =  messageRepository.findAll();
-        model.addAttribute("messages", messages);
+    public String index() {
+
         return "index";
     }
 
-    @PostMapping
+    @GetMapping("/main")
+    public String main(Model model) {
+        Iterable<Message> messages =  messageRepository.findAll();
+        model.addAttribute("messages", messages);
+        return "main";
+    }
+
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag, Model model) {
         Message message = new Message(text, tag);
         messageRepository.save(message);
         Iterable<Message> messages =  messageRepository.findAll();
         model.addAttribute("messages", messages);
 
-        return "index";
+        return "main";
     }
 
     @PostMapping("filter")
@@ -42,7 +48,7 @@ public class MainController {
         }
 
         model.addAttribute("messages", messages);
-        return "index";
+        return "main";
     }
 
 }
