@@ -12,7 +12,7 @@ import ru.magdiev.springExample.repositories.MessageRepository;
 
 @Controller
 public class MainController {
-    @Autowired
+
     private MessageRepository messageRepository;
 
     @GetMapping
@@ -50,4 +50,8 @@ public class MainController {
         return "main";
     }
 
+    @Autowired
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 }
