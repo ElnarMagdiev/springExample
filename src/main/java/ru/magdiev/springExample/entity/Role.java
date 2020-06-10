@@ -1,5 +1,9 @@
 package ru.magdiev.springExample.entity;
 
+
 public enum Role {
-    USER, ADMIN
+    USER, ADMIN;
+
+    Role() {
+    }
 }

@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
+
     private DataSource dataSource;
 
     @Override
@@ -44,7 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
-        .usersByUsernameQuery("SELECT username, password, active FROM usr WHERE username = ?")
-        .authoritiesByUsernameQuery("SELECT u.username, ur.roles FROM usr u INNER JOIN user_role ur on u.id = ur.user_id WHERE u.username = ?");
+        .usersByUsernameQuery("SELECT username, password, active FROM schema_example.usr WHERE username = ?")
+        .authoritiesByUsernameQuery("SELECT u.username, ur.roles FROM schema_example.usr u INNER JOIN schema_example.user_role ur on u.id = ur.user_id WHERE u.username = ?");
+    }
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 }
