@@ -4,7 +4,19 @@
     <title>Users</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+</table>
 <body>
-<p th:each="user : ${users}">
+<tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${#strings.setJoin(user.roles, ', ')}"></td>
+    <td><a th:href="@{'/user/' + ${user.id}}">edit</a></td>
+</tr>
 </body>
 </html>
