@@ -3,6 +3,7 @@
 <head>
     <title>Main page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link>
 </head>
 <body>
 <form th:action="@{/logout}" method="post">
@@ -13,9 +14,10 @@
 </div>
 <br>
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="text" name="text" placeholder="Введите сообщение">
         <input type="text" name="tag" placeholder="Тэг">
+        <input type="file" name="file">
         <button type="submit">Добавить</button>
     </form>
 </div>
@@ -27,9 +29,10 @@
 
 <p th:each="message : ${messages}">
     <b th:text="${message.id}"></b>
-    <b th:text="${message.text}"></b>
-    <b th:text="${message.tag}"></b>
-    <b th:text="${message.authorName}"></b>
+    <span th:text="${message.text}"></span>
+    <i th:text="${message.tag}"></i>
+    <strong th:text="${message.authorName}"></strong>
+    <img th:if="${message.filename != null}" th:src="@{'/img/' + ${message.filename}}">
 </p>
 </body>
 </html>
