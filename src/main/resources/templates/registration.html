@@ -13,9 +13,19 @@
 <div class="container mt-5">
     <!--<p th:if="${!empty message}">${message}</p>-->
     <form action="/registration" method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Зарегистрироваться"/></div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> User Name : </label>
+            <div class="col-sm-6">
+                <input type="text" name="username" class="form-control" placeholder="Имя пользователя"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Password: </label>
+            <div class="col-sm-6">
+                <input type="password" name="password" class="form-control" placeholder="Пароль"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
     </form>
 </div>
 <div th:insert="parts/scripts :: script"></div>
