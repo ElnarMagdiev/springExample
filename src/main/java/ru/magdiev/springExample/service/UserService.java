@@ -1,5 +1,6 @@
 package ru.magdiev.springExample.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,9 @@ import java.util.UUID;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+
+    @Autowired
+    private MailSender mailSender;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -38,7 +42,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         if (!StringUtils.isEmpty(user.getEmail())) {
+            String message = String.format("Hello, %s \n" +
+                    "welcome to app. Please, visit next link: http://localhost:8080/activate/%s",
+                    user.getUsername(),
+                    user.getActivationCode());
 
+            mailSender.send(user.getEmail(), "Activation code", message);
         }
 
         return true;
