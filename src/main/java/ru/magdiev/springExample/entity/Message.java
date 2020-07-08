@@ -1,6 +1,9 @@
 package ru.magdiev.springExample.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -9,6 +12,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Пожалуйста, заполните текст сообщения")
+    @Length(max = 2048, message = "Сообщение слишком длинное!")
     private String text;
     private String tag;
     @ManyToOne(fetch = FetchType.EAGER)
