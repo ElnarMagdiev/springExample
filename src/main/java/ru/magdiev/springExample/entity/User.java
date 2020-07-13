@@ -19,9 +19,7 @@ public class User implements UserDetails {
     private String username;
     @NotBlank(message = "Пароль не может быть пустым!")
     private String password;
-    @Transient
-    @NotBlank(message = "Конфигурация пароля не может быть пустым!")
-    private String passwordConf;
+
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -30,7 +28,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @Email(message = "Email введен некорректно!")
-    @NotBlank(message = "Пароль не может быть пустым!")
+    @NotBlank(message = "Email не может быть пустым!")
     private String email;
     private String activationCode;
 
@@ -118,11 +116,4 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-    public String getPasswordConf() {
-        return passwordConf;
-    }
-
-    public void setPasswordConf(String passwordConf) {
-        this.passwordConf = passwordConf;
-    }
 }

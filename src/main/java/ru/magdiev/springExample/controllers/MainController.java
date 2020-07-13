@@ -74,6 +74,7 @@ public class MainController {
                 file.transferTo(new File(uploadPath + "/" + resultFilename));
                 message.setFilename(resultFilename);
             }
+            model.addAttribute("message", null);
             messageRepository.save(message);
         }
         Iterable<Message> messages = messageRepository.findAll();

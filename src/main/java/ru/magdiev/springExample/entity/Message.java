@@ -15,6 +15,7 @@ public class Message {
     @NotBlank(message = "Пожалуйста, заполните текст сообщения")
     @Length(max = 2048, message = "Сообщение слишком длинное!")
     private String text;
+    @Length(max = 255, message = "Сообщение слишком длинное!")
     private String tag;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

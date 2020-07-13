@@ -16,19 +16,36 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-6">
-                <input type="text" name="username" class="form-control" placeholder="Имя пользователя"/>
+                <input type="text" name="username"
+                       th:class="${usernameError} ? 'form-control is-invalid' : 'form-control'"
+                       placeholder="Имя пользователя"
+                       th:value="${user} ? ${user.username} : ''"/>
+                <div class="invalid-feedback" th:text="${usernameError}"></div>
+
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Password: </label>
             <div class="col-sm-6">
-                <input type="password" name="password" class="form-control" placeholder="Пароль"/>
+                <input type="password" name="password" th:class="${usernameError} ? 'form-control is-invalid' : 'form-control'" placeholder="Пароль"/>
+                <div class="invalid-feedback" th:text="${passwordError}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Password: </label>
+            <div class="col-sm-6">
+                <input type="password" name="passwordConf" th:class="${passwordConfError} ? 'form-control is-invalid' : 'form-control'" placeholder="Повторите пароль"/>
+                <div class="invalid-feedback" th:text="${passwordConfError}"></div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Email: </label>
             <div class="col-sm-6">
-                <input type="email" name="email" class="form-control" placeholder="some@some.com"/>
+                <input type="email" name="email"
+                       th:class="${emailError} ? 'form-control is-invalid' : 'form-control'"
+                       placeholder="some@some.com"
+                       th:value="${user} ? ${user.email} : ''"/>
+                <div class="invalid-feedback" th:text="${emailError}"></div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Зарегистрироваться</button>

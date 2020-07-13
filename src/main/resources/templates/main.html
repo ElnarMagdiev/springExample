@@ -27,17 +27,21 @@
         Добавить новое сообщение
     </a>
 
-    <div class="collapse" id="collapseExample">
+    <div th:class="${message} ? 'collapse show': 'collapse'" id="collapseExample">
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" name="text" class="form-control" placeholder="Введите сообщение">
-                    <div class="invalid-feedback">
+                    <input type="text" name="text" th:class="${textError} ? 'form-control is-invalid' : 'form-control'" placeholder="Введите сообщение"
+                           th:value="${message} ? ${message.text} : ''">
+                    <div class="invalid-feedback" th:text="${textError}">
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="tag" class="form-control" placeholder="Тэг">
+                    <input type="text" name="tag" th:value="${message} ? ${message.tag} : ''" class="form-control" placeholder="Тэг">
+                    <div class="invalid-feedback" th:text="${tagError}">
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">

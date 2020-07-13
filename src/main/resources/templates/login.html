@@ -5,18 +5,25 @@
     <title>Spring Security Example </title>
     <link rel="stylesheet" href="/static/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link th:insert="parts/scripts :: bsHead">
 </head>
 <body>
 <div th:insert="parts/navbar :: navbar"></div>
 <div class="container mt-5">
-    <div th:if="${param.error}" class="mb-1">
-        Invalid username and password.
+    <div th:if="${param.error} and ${session[SPRING_SECURITY_LAST_EXCEPTION]}">
+        <div class="alert alert-danger" role="alert" th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></div>
+
     </div>
+
+    <div th:if="${message}">
+        <div class="alert alert-danger" role="alert" th:text="${message}"></div>
+
+    </div>
+
     <div th:if="${param.logout}" class="mb-1">
         You have been logged out.
     </div>
+
     <form action="/login" method="post">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User Name : </label>
