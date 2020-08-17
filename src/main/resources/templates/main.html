@@ -63,10 +63,12 @@
                     <img class="card-img-top" th:src="@{'/img/' + ${message.filename}}">
                 </div>
                 <div class="card-body m-2">
-                    <span th:text="${message.text}"></span>
+                    <span th:text="${message.text}"></span><br/>
                     <i th:text="${'#' + message.tag}"></i>
                 </div>
-                <div class="card-footer text-muted" th:text="${message.getAuthorName()}"></div>
+                <div class="card-footer text-muted">
+                    <a th:href="@{'/user-messages/' + ${message.author.id}}" th:text="${message.getAuthorName()}"></a>
+                </div>
             </div>
         </div>
     </div>
